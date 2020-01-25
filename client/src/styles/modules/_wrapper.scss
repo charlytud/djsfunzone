@@ -1,0 +1,35 @@
+.app-wrapper {
+    overflow: hidden;
+    max-width: 1236px;
+    margin: 0 auto;
+    padding: 0 10px;
+
+    &--full {
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        background: $veryLightGray;
+    }
+
+    &--dash-header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+    }
+}

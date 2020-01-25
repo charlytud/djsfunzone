@@ -1,0 +1,49 @@
+.app-form {
+    display: flex;
+    flex-direction: column;
+    color: $mainBlack;
+
+    &__row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0px;
+        color: $mainBlack;
+    }
+
+    &__input {
+        padding: 5px 8px;
+        font-size: .8rem;
+    }
+
+    &__select {
+        select {
+            color: $mainBlue;
+            option {
+                padding: 5px;
+                font-size: 1rem;
+                color: white;
+            }
+        }
+    }
+
+    &__search-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        div {
+            padding: 10px 15px 10px 0;
+        }
+    }
+
+    &__link {
+        font-weight: $bold;
+        font-size: .6rem;
+        color: $mainBlue;
+        &:hover {
+            color: $mainBlue;
+        }
+    }
+}

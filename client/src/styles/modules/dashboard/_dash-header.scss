@@ -1,0 +1,20 @@
+.dash-header {
+    width: 100vw;
+    margin: 0;
+    padding: 20px 0px;
+    color: $white;
+    background: $mainBlack;
+
+    &__nav {
+        display: flex;
+        flex-direction: row;
+        ul {
+            display: flex;
+            flex-direction: row;
+
+            li {
+                padding: 0 10px;
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+.dash-table {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto; 
+    
+    th, td {
+        padding: 10px 5px 10px 5px;
+    }
+
+    th {
+        font-size: .8rem;
+        font-weight: $bold;
+        text-align: center;
+        color: $white;
+        background: $mainBlue;
+    }
+
+    td {
+        font-size: .8rem;
+        font-weight: $light;
+    }
+
+    tr:nth-child(even){
+        color: $mainBlack;
+        background: $veryLightGray;
+
+    }
+}

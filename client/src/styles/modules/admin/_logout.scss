@@ -1,0 +1,11 @@
+.app-logout {
+    display: flex;
+    flex-direction: column;
+    margin-top: -200px;
+
+    ul {
+        li:first-child {
+            font-weight: $bold;
+        }
+    }
+}
