@@ -1,0 +1,84 @@
+.app-header {
+    display: flex;
+    flex-direction: column;
+    color: $white;
+
+    &__top-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background: $mainBlack;
+
+        &__left {
+            span {
+                font-size: 1.2rem;
+                padding: 12px 50px;
+                font-weight: $bold;
+                cursor: pointer;
+                background: $success;
+            }
+        }
+
+        &__right {
+            ul {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                li {
+                    display: inline-block;
+                    padding: 5px 20px;
+                    cursor: pointer;
+                }
+
+                li:last-child{
+                    text-decoration: none;
+                    font-size: 1.2rem;
+                    padding: 12px 50px;
+                    font-weight: $bold;
+                    background: $error; 
+                }
+            }
+        }
+    }
+
+    &__bottom-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        color: $mainBlack;
+       
+        &__right {
+            ul {
+                display: flex;
+                flex-direction: row;
+                li{
+                    display: inline-block;
+                    padding: 15px 10px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    &__contact-info {
+        display: flex;
+        width: 500px;
+        justify-content: center;
+        color: $white;
+
+        ul {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 15px 10px;
+            border-radius: 8px 8px 0 0;
+            background: $mainBlack;
+
+            li{
+                padding: 0 10px;
+            }
+        }
+    }
+}
