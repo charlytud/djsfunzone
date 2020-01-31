@@ -23,23 +23,6 @@ const productSchema = new Schema({
   unitPrice: {
     type: Number,
     required: true
-  },
-  unitsInStock: {
-    type: Number,
-    required: true
-  },
-  unitsInOrder: {
-    type: Number,
-    required: true
-  },
-  reorderLevel: {
-    type: Number,
-    default: 0
-  },
-  discontinued: {
-    type: Boolean,
-    required: true,
-    default: false
   }
 }, {
   timestamps: true,

@@ -18,7 +18,7 @@ export default class Header extends Component {
                 </div>
                 <div className="app-wrapper app-wrapper--medium app-header__bottom-nav">
                     <div className="app-header__bottom-nav__left">
-                      Logo
+                      <img src="./images/logo/logo.png" alt="Logo" height="auto" width="300"/>
                     </div>
                     <div className="app-header__bottom-nav__right">
                         <ul>
