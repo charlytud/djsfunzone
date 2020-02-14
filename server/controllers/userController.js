@@ -79,5 +79,24 @@ module.exports = {
         if(!user) return res.status(404).json({error: "user Not Found"});
         
         return res.status(200).json({ success: true });      
+    }),
+    loginUser: asyncMiddleware(async(req, res) => {
+        return res.status(200).json({
+            isAuth: true,
+            userId: req.user._id,
+            userName: req.user.userName,
+            userEmail: req.user.userEmail,
+            userCell: req.user.userCell,
+            userPicture: req.user.picture
+        })
+    }),
+    logoutUser: asyncMiddleware(async(req, res) => {
+        req.user.deleteToken(req.token, (err, user) => {
+            if(err) return res.status(400).send(err);
+            res.status(200).json({
+                success: true 
+            })
+        })
     })
+
 };
