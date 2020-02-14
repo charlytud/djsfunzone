@@ -3,7 +3,7 @@ module.exports = handler => {
         try {
             await handler(req, res);
         } catch(error) {
-            throw new Error("Unresolved Promise");
+            // throw new Error("Unresolved Promise");
             console.log(error);
         }
     }

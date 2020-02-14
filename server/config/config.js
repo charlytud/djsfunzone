@@ -5,7 +5,7 @@ const config = {
   },
   default: {
     SECRET: 'S7HpZ5FcrW2mK',
-    DATABASE: 'mongodb://localhost:27017/warehouse',
+    DATABASE: 'mongodb://localhost:27017/djsfunzone',
   },
 };
 

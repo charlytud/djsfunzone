@@ -2,13 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const config = require('./config/config').get(process.env.NODE_ENV, { 
-  useNewUrlParser: true, 
-  useUnifiedTopology: true 
- });
+const config = require('./config/config').get(process.env.NODE_ENV);
  
 mongoose.Promise = global.Promise;
-mongoose.connect(config.DATABASE);
+mongoose.connect(config.DATABASE, { 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true,
+  useFindAndModify: false 
+});
 
 const app = express();
 require("./api/parser")(app);

@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const { getSuppliers, getSupplierById } = require('../../controllers/supplierController');
+// const express = require('express');
+// const router = express.Router();
+// const { getSuppliers, getSupplierById } = require('../../controllers/supplierController');
 
-router.get('/', getSuppliers);
-router.get('/supplier', getSupplierById);
+// router.get('/', getSuppliers);
+// router.get('/supplier', getSupplierById);
 
 
-module.exports = router;
+// module.exports = router;
