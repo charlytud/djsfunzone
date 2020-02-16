@@ -1,6 +1,7 @@
 
 const { User } = require("../models/user");
 const asyncMiddleware = require("../middlewares/async");
+// const auth = require("../middlewares/auth");
 
 module.exports = {
     createUser: asyncMiddleware(async(req, res) => {
@@ -81,13 +82,33 @@ module.exports = {
         return res.status(200).json({ success: true });      
     }),
     loginUser: asyncMiddleware(async(req, res) => {
-        return res.status(200).json({
-            isAuth: true,
-            userId: req.user._id,
-            userName: req.user.userName,
-            userEmail: req.user.userEmail,
-            userCell: req.user.userCell,
-            userPicture: req.user.picture
+        const {
+            email,
+            password
+        } = req.body;
+
+        await User.findOne({'email': email}, (err, user) => {
+            if(err) return res.status(400).send(err);
+            if(!user) return res.status(204).json({
+                isAuth: false,
+                error: "Email not found"
+            })
+
+            User.comparePassword(password, (err, isMatch) =>{
+                if(err) res.send(err);
+                if(!isMatch) return res.status(204).json({
+                    isAuth: false,
+                    error: "Wrong Password"
+                })
+
+                User.genToken((err, user) => {
+                    if(err) return  res.status(400).send(err);
+                    res.cookie('auth', user.token).json({
+                        isAuth: true,
+                        user
+                    })
+                })
+            })
         })
     }),
     logoutUser: asyncMiddleware(async(req, res) => {

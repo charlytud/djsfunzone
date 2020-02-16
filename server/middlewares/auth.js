@@ -1,6 +1,5 @@
-import User from '../models/user';
-
-module.exports = (req, res, next) => {
+const auth = (req, res, next) => {
+    const User = require('../models/user');
     const token = req.cookies.auth;
 
     User.findByToken(token, (err, user) => {
@@ -16,3 +15,5 @@ module.exports = (req, res, next) => {
         next();
     })
 }
+
+module.exports = {auth};
