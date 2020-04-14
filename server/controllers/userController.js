@@ -1,7 +1,6 @@
 
 const { User } = require("../models/user");
 const asyncMiddleware = require("../middlewares/async");
-// const auth = require("../middlewares/auth");
 
 module.exports = {
     createUser: asyncMiddleware(async(req, res) => {
@@ -10,7 +9,8 @@ module.exports = {
             email,
             cell,
             picture,
-            password
+            password,
+            token
         } = req.body;
     
         let userFields = {};
@@ -20,6 +20,7 @@ module.exports = {
         if(cell) userFields.userCell = cell;
         if(picture) userFields.picture = picture;
         if(password) userFields.password = password;
+        if(token) userFields.token = token;
 
         // console.log(userFields);
         await new User(userFields).save((err, user) => {
@@ -53,7 +54,6 @@ module.exports = {
             { $new: true },
             function(err, user){
                 if (err) return res.send(err);
-                
                 return res.status(200).json({
                     success: "true",
                 });
@@ -87,21 +87,21 @@ module.exports = {
             password
         } = req.body;
 
-        await User.findOne({'email': email}, (err, user) => {
+        await User.findOne({'userEmail': email}, (err, user) => {
             if(err) return res.status(400).send(err);
-            if(!user) return res.status(204).json({
-                isAuth: false,
-                error: "Email not found"
-            })
+            // console.log(password);
+            if(!user) return res.status(208).json({
+                err: "email not found"
+            });
 
-            User.comparePassword(password, (err, isMatch) =>{
+            user.comparePassword(password, (err, isMatch) =>{
                 if(err) res.send(err);
                 if(!isMatch) return res.status(204).json({
                     isAuth: false,
                     error: "Wrong Password"
                 })
 
-                User.genToken((err, user) => {
+                user.genToken((err, user) => {
                     if(err) return  res.status(400).send(err);
                     res.cookie('auth', user.token).json({
                         isAuth: true,
@@ -119,5 +119,4 @@ module.exports = {
             })
         })
     })
-
 };

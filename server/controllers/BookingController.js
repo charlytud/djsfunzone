@@ -1,5 +1,5 @@
 
-const { booking } = require("../models/booking");
+const { Booking } = require("../models/booking");
 const asyncMiddleware = require("../middlewares/async");
 
 module.exports = {
@@ -15,28 +15,38 @@ module.exports = {
 
         if(start) bookingFields.startDate = start;
         if(end) bookingFields.endDate = end;
-        if(product) bookingFields.productId = productId;
-        if(user) bookingFields.userId = userId;
+        if(product) bookingFields.productId = product;
+        if(user) bookingFields.userId = user;
 
-        const newBooking = await new booking(bookingFields).save();        
+        await new Booking(bookingFields).save((err, booking) => {
+            if(err) return res.status(400).json({
+                success: false,
+                error: err
+            });
+
+            res.status(200).json({
+                success: true,
+                booking: booking
+            })
+        });        
     }),
     updateBooking: asyncMiddleware(async(req, res) => {
         const {
             _id,
-            name,
-            description,
-            rate,
-            picture
+            start,
+            end,
+            product,
+            user
         } = req.body;
     
         let bookingFields = {};
 
-        if(name) bookingFields.bookingName = name;
-        if(description) bookingFields.description = description;
-        if(rate) bookingFields.rate = rate;
-        if(picture) bookingFields.picture = picture;
+        if(start) bookingFields.startDate = start;
+        if(end) bookingFields.endDate = end;
+        if(product) bookingFields.productId = product;
+        if(user) bookingFields.userId = user;
 
-        booking.findByIdAndUpdate(
+        Booking.findByIdAndUpdate(
             { _id },
             { bookingFields },
             { $new: true},
@@ -45,29 +55,29 @@ module.exports = {
                 
                 return res.status(200).json({
                     success: "true",
-                    booking
+                    booking: booking
                 });
             }
         );
     }),
     getBookings: asyncMiddleware(async(req, res) => {
-        const bookings = await booking.find();
+        const bookings = await Booking.find();
         if(!bookings){
-            return res.status(404).json({ error: "No booking Found"});
+            return res.status(204).json({ error: "No booking Found"});
         }
         return res.status(200).json(bookings);
     }),
     getBookingById: asyncMiddleware(async(req, res)=>{
         const _id = req.query.id;
-        const booking = await booking.findById({ _id });
-        if(!booking) return res.status(400).json({ error: "No booking Found" });
+        const booking = await Booking.findById({ _id });
+        if(!booking) return res.status(204).json({ error: "No booking Found" });
         return res.status(200).send(booking);
     }),
     deleteBooking: asyncMiddleware(async(req, res) => {
         const _id = req.query.id;
-        const booking = await booking.findByIdAndRemove({ _id });
+        const booking = await Booking.findByIdAndRemove({ _id });
 
-        if(!booking) return res.status(400).json({error: "booking Not Found"});
+        if(!booking) return res.status(204).json({error: "booking Not Found"});
         
         return res.status(200).json({ success: true });      
     })
